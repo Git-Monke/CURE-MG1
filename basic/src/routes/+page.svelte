@@ -171,7 +171,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc(100% - 10vh);
+    width: 50%;
     margin: auto;
     padding: 20px;
   }
