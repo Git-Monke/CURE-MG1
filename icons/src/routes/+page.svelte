@@ -13,13 +13,34 @@
     }
   }
 
+  function randUpTo(n) {
+    return Math.floor(Math.random() * n);
+  }
+
+  function overlapsExisting(x, y, icons) {
+    for (let icon of icons) {
+      if (
+        (x <= icon.x + 16 && x >= icon.x) ||
+        (y <= icon.y + 16 && y >= icon.y)
+      ) {
+        return true;
+      }
+    }
+  }
+
   function randIcons(n) {
     let icon_list = [];
+
     for (let i = 0; i < n; i++) {
-      let rand_icon_name =
-        icon_names[Math.floor(Math.random() * icon_names.length)];
-      let x = Math.floor(Math.random() * (size.width - 64));
-      let y = Math.floor(Math.random() * (size.height - 64));
+      let rand_icon_name = icon_names[randUpTo(icon_names.length)];
+
+      let x;
+      let y;
+
+      do {
+        x = randUpTo(size.width - 64);
+        y = randUpTo(size.height - 64);
+      } while (overlapsExisting(x, y, icon_list));
 
       icon_list.push(new Icon(x, y, rand_icon_name));
     }
